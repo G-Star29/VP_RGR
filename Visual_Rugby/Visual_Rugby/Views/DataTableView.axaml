@@ -1,0 +1,81 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Visual_Rugby.Views.DataTableView">
+	
+	<UserControl.Styles>
+		<Style Selector="TabControl">
+			<Setter Property="Background" Value="#F0F0F0"/>
+		</Style>
+		<Style Selector="TabControl WrapPanel">
+			<Setter Property="Background" Value="#2B579A"/>
+		</Style>
+
+		<Style Selector="TabItem">
+			<Setter Property="FontSize" Value="22"/>
+			<Setter Property="Height" Value="54"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Background" Value="#2B579A"/>
+			<Setter Property="Foreground" Value="#F0F0F0"/>
+			<Setter Property="Margin" Value="0 0 0 0"/>
+			<Setter Property="Padding" Value="10 0"/>
+		</Style>
+		<Style Selector="TabItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="#124078"/>
+		</Style>
+
+		<Style Selector="TabItem:focus">
+			<Setter Property="Foreground" Value="#2B579A"/>
+			<Setter Property="Margin" Value="0 0 0 0"/>
+			<Setter Property="Padding" Value="10 0"/>
+		</Style>
+		<Style Selector="TabItem:focus /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="#f0f0f0"/>
+		</Style>
+
+		<Style Selector="TabItem:selected">
+			<Setter Property="Foreground" Value="#2B579A"/>
+			<Setter Property="Margin" Value="0 0 0 0"/>
+			<Setter Property="Padding" Value="10 0"/>
+		</Style>
+		<Style Selector="TabItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="#f0f0f0"/>
+		</Style>
+
+	</UserControl.Styles>
+	<Grid ColumnDefinitions="10*" RowDefinitions="20*,1.5*">
+		<TabControl Grid.Column="0" Grid.Row="0">
+			<TabItem Header="Team" VerticalContentAlignment="Center">
+			</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock VerticalAlignment="Center">Match</TextBlock>
+				</TabItem.Header>
+			</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock VerticalAlignment="Center">Match-Result</TextBlock>
+				</TabItem.Header>
+			</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock VerticalAlignment="Center">Tournament</TextBlock>
+				</TabItem.Header>
+			</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock VerticalAlignment="Center">Country</TextBlock>
+				</TabItem.Header>
+			</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<TextBlock VerticalAlignment="Center">Stadium</TextBlock>
+				</TabItem.Header>
+			</TabItem>
+		</TabControl>
+		<Button Command="{Binding $parent[Window].DataContext.RequestToDB}" Grid.Column="0" Grid.Row="1"> Make Request</Button>
+	</Grid>
+	
+</UserControl>
