@@ -25,7 +25,6 @@
 		<Style Selector="TabItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="Background" Value="#124078"/>
 		</Style>
-
 		<Style Selector="TabItem:focus">
 			<Setter Property="Foreground" Value="#2B579A"/>
 			<Setter Property="Margin" Value="0 0 0 0"/>
@@ -48,39 +47,152 @@
 	<Grid ColumnDefinitions="*" RowDefinitions="20*">
 		<TabControl Grid.Column="0" Grid.Row="0">
 			<TabItem Header="Team" VerticalContentAlignment="Center">
+				<Grid>
+					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Teams,}" AutoGenerateColumns="False" CanUserReorderColumns="True" >
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+							<DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+							<DataGridTextColumn Header="Number Of Players" Binding="{Binding NumberOfPlayers}"/>
+							<DataGridTextColumn Header="Games" Binding="{Binding Games}"/>
+							<DataGridTextColumn Header="Age" Binding="{Binding Age}"/>
+							<DataGridTextColumn Header="CountryId" Binding="{Binding CountryId}"/>
+							<DataGridTemplateColumn>
+								<DataTemplate>
+									<Button Command="{Binding $parent[Window].DataContext.DeleteRowTeam}" CommandParameter="{Binding}">Delete</Button>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center">Match</TextBlock>
 				</TabItem.Header>
+				<Grid>
+					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Matchs}" AutoGenerateColumns="False" CanUserReorderColumns="True">
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+							<DataGridTextColumn Header="Team0" Binding="{Binding Team0}"/>
+							<DataGridTextColumn Header="Team1" Binding="{Binding Team1}"/>
+							<DataGridTextColumn Header="TournamentId" Binding="{Binding TournamentId}"/>
+							<DataGridTextColumn Header="StaduimId" Binding="{Binding StaduimId}"/>
+							<DataGridTextColumn Header="ResultId" Binding="{Binding ResultId}"/>
+							<DataGridTemplateColumn>
+								<DataTemplate>
+									<Button Command="{Binding $parent[Window].DataContext.DeleteRowMatch}" CommandParameter="{Binding}">Delete</Button>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center">Match-Result</TextBlock>
 				</TabItem.Header>
+				<Grid>
+					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Results}" AutoGenerateColumns="False" CanUserReorderColumns="True">
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+							<DataGridTextColumn Header="Score0" Binding="{Binding Score0}"/>
+							<DataGridTextColumn Header="Score1" Binding="{Binding Score1}"/>
+							<DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
+							<DataGridTemplateColumn>
+								<DataTemplate>
+									<Button Command="{Binding $parent[Window].DataContext.DeleteRowResult}" CommandParameter="{Binding}">Delete</Button>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+						
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center">Tournament</TextBlock>
 				</TabItem.Header>
+				<Grid>
+					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Tournaments}" AutoGenerateColumns="False" CanUserReorderColumns="True">
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+							<DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+							<DataGridTextColumn Header="NumberOfGames" Binding="{Binding NumberOfGames}"/>
+							<DataGridTemplateColumn>
+								<DataTemplate>
+									<Button Command="{Binding $parent[Window].DataContext.DeleteRowTournament}" CommandParameter="{Binding}">Delete</Button>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center">Country</TextBlock>
 				</TabItem.Header>
+				<Grid>
+					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Countrys}" AutoGenerateColumns="False" CanUserReorderColumns="True">
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+							<DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+							<DataGridTemplateColumn>
+								<DataTemplate>
+									<Button Command="{Binding $parent[Window].DataContext.DeleteRowCountry}" CommandParameter="{Binding}">Delete</Button>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center">Stadium</TextBlock>
 				</TabItem.Header>
+				<Grid>
+					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Staduims}" AutoGenerateColumns="False" CanUserReorderColumns="True">
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+							<DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+							<DataGridTextColumn Header="CountryId" Binding="{Binding CountryId}"/>
+							<DataGridTemplateColumn>
+								<DataTemplate>
+									<Button Command="{Binding $parent[Window].DataContext.DeleteRowStadium}" CommandParameter="{Binding}">Delete</Button>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
+			</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<Button>New</Button>
+				</TabItem.Header>
+			</TabItem>
+			<TabItem>
+				<TabItem.Header>
+					<Button>Save Changes</Button>
+				</TabItem.Header>
+			</TabItem>
+			<TabItem>
+				<TabControl  Grid.Column="1" Grid.Row="0" Items="{Binding $parent[Window].DataContext.Items}">
+					<TabControl.ItemTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Name}" />
+						</DataTemplate>
+					</TabControl.ItemTemplate>
+					<TabControl.ContentTemplate>
+						<DataTemplate>
+							<DockPanel LastChildFill="True">
+							</DockPanel>
+						</DataTemplate>
+					</TabControl.ContentTemplate>
+				</TabControl>
+				<TabItem.Header>
+					<Button Command="{Binding $parent[Window].DataContext.RequestToDB}">Make Request</Button>
+				</TabItem.Header>
 			</TabItem>
 		</TabControl>
-		<Grid ColumnDefinitions="0.21*,0.1*,0.124*,*" RowDefinitions="20*,2*">
-			<Button Grid.Column="1" Grid.Row="1"> New</Button>
-			<Button Grid.Column="2" Grid.Row="1"> Delete</Button>
-			<Button Grid.Column="4" Grid.Row="1"> Save Changes</Button>
-			<Button Command="{Binding $parent[Window].DataContext.RequestToDB}" Grid.Column="0" Grid.Row="1"> Make Request</Button>
-		</Grid>
 	</Grid>
 	
 </UserControl>

@@ -37,7 +37,7 @@
 			Create
 		</Button>
 
-		<Button Command="{Binding MainWindowViewModel}" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Row="3">
+		<Button Command="{Binding $parent[Window].DataContext.DeleteRow}" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Row="3">
 			Cancel
 		</Button>
 	</Grid>
