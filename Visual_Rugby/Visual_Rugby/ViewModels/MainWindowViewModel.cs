@@ -15,6 +15,7 @@ namespace Visual_Rugby.ViewModels
         private ObservableCollection<Match> _matchs;
         private ObservableCollection<Country> _countrys;
         rugbyContext data;
+        DBcontext tablesDB;
         public rugbyContext Data
         {
             get { return data; }
@@ -124,9 +125,8 @@ namespace Visual_Rugby.ViewModels
         private void NewRowStaduim() => Staduims.Add(new Staduim());
         private void NewRowTournament() => Tournaments.Add(new Tournament());
         private void SaveChangesToBD()
-        {
-            var db = new rugbyContext();
-            db.SaveChanges();
+        }
+            tablesDB.SaveChanges();
         }
         private void GoToMainMenu()
         {
