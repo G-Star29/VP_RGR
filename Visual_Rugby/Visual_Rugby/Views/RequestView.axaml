@@ -17,16 +17,31 @@
 			</ComboBox>
 		</StackPanel>
 
-		<Grid Grid.Row="0" Grid.Column="1" RowDefinitions="*,*,*,*,*,*" ColumnDefinitions="*,*,*,*">
+		<Grid Grid.Row="0" Grid.Column="1" RowDefinitions="*,*,*,*,*,*,*" ColumnDefinitions="0.5*,0.5*,0.5*,0.5*,1*,*,*,*">
 			<TextBlock Grid.Row="0" Grid.Column="1"> Requst Menu </TextBlock>
-				<Expander Grid.Row="1" Header="SELECT">
-				</Expander>
-				<Expander Grid.Row="1" Grid.Column="1" Header="WHERE">
-				</Expander>
-				<Expander Grid.Row="1" Grid.Column="2" Header="JOIN">
-				</Expander>
-				<Expander Grid.Row="1" Grid.Column="3" Header="GROUP BY">
-				</Expander>
+				<ComboBox Grid.Row="1">
+					<ComboBoxItem>Select</ComboBoxItem>
+				</ComboBox>
+			<TextBox Grid.Row="1" Grid.Column="1" Watermark="Columns"></TextBox>
+									
+				<ComboBox Grid.Row="1" Grid.Column="2">
+					<ComboBoxItem>From</ComboBoxItem>
+				</ComboBox>
+				<ComboBox Grid.Row="1" Grid.Column="3">
+					<ComboBoxItem>Team</ComboBoxItem>
+					<ComboBoxItem>Result</ComboBoxItem>
+					<ComboBoxItem>Match</ComboBoxItem>
+					<ComboBoxItem>Country</ComboBoxItem>
+					<ComboBoxItem>Stadium</ComboBoxItem>
+					<ComboBoxItem>Tournament</ComboBoxItem>
+				</ComboBox>
+				<ComboBox Grid.Row="1" Grid.Column="4">
+					<ComboBoxItem>WHERE</ComboBoxItem>
+				</ComboBox>
+				<TextBox Grid.Row="1" Grid.Column="5" Watermark="Condition"></TextBox>
+				<ComboBox Grid.Row="1" Grid.Column="6">
+					<ComboBoxItem>GROUP BY</ComboBoxItem>
+				</ComboBox>
 
 		</Grid>
 			<TextBlock Grid.Row="2" Grid.Column="1" >SQL Request: </TextBlock>
@@ -37,7 +52,7 @@
 			Create
 		</Button>
 
-		<Button Command="{Binding $parent[Window].DataContext.DeleteRow}" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Row="3">
+		<Button Command="{Binding $parent[Window].DataContext.GoToMainMenu}" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Row="3">
 			Cancel
 		</Button>
 	</Grid>

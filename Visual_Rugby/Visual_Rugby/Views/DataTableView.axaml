@@ -47,8 +47,9 @@
 	<Grid ColumnDefinitions="*" RowDefinitions="20*">
 		<TabControl Grid.Column="0" Grid.Row="0">
 			<TabItem Header="Team" VerticalContentAlignment="Center">
-				<Grid>
-					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Teams,}" AutoGenerateColumns="False" CanUserReorderColumns="True" >
+				<Grid RowDefinitions="*,20*">
+					<Grid Grid.Row="1">
+					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Teams}" AutoGenerateColumns="False" CanUserReorderColumns="True" >
 						<DataGrid.Columns>
 							<DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
 							<DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
@@ -64,13 +65,17 @@
 						</DataGrid.Columns>
 					</DataGrid>
 				</Grid>
+				<Button Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+						Command="{Binding $parent[Window].DataContext.NewRowTeam}">New</Button>
+				</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center">Match</TextBlock>
 				</TabItem.Header>
-				<Grid>
-					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Matchs}" AutoGenerateColumns="False" CanUserReorderColumns="True">
+				<Grid RowDefinitions="*,20*">
+					<Grid Grid.Row="1">
+					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Matches}" AutoGenerateColumns="False" CanUserReorderColumns="True">
 						<DataGrid.Columns>
 							<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
 							<DataGridTextColumn Header="Team0" Binding="{Binding Team0}"/>
@@ -86,12 +91,15 @@
 						</DataGrid.Columns>
 					</DataGrid>
 				</Grid>
+				<Button Grid.Row="0"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">New</Button>
+				</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center">Match-Result</TextBlock>
 				</TabItem.Header>
-				<Grid>
+				<Grid RowDefinitions="*,20*">
+					<Grid Grid.Row="1">
 					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Results}" AutoGenerateColumns="False" CanUserReorderColumns="True">
 						<DataGrid.Columns>
 							<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
@@ -106,13 +114,16 @@
 						
 						</DataGrid.Columns>
 					</DataGrid>
+					</Grid>
+				<Button Grid.Row="0"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">New</Button>
 				</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center">Tournament</TextBlock>
 				</TabItem.Header>
-				<Grid>
+				<Grid RowDefinitions="*,20*">
+					<Grid Grid.Row="1">
 					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Tournaments}" AutoGenerateColumns="False" CanUserReorderColumns="True">
 						<DataGrid.Columns>
 							<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
@@ -126,13 +137,16 @@
 						</DataGrid.Columns>
 					</DataGrid>
 				</Grid>
+				<Button Grid.Row="0"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">New</Button>
+				</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center">Country</TextBlock>
 				</TabItem.Header>
-				<Grid>
-					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Countrys}" AutoGenerateColumns="False" CanUserReorderColumns="True">
+				<Grid RowDefinitions="*,20*">
+					<Grid Grid.Row="1">
+					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Countries}" AutoGenerateColumns="False" CanUserReorderColumns="True">
 						<DataGrid.Columns>
 							<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
 							<DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
@@ -144,12 +158,15 @@
 						</DataGrid.Columns>
 					</DataGrid>
 				</Grid>
+				<Button Grid.Row="0"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">New</Button>
+			</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
 					<TextBlock VerticalAlignment="Center">Stadium</TextBlock>
 				</TabItem.Header>
-				<Grid>
+				<Grid RowDefinitions="*,20*">
+					<Grid Grid.Row="1">
 					<DataGrid BorderBrush="Black" Items="{Binding $parent[Window].DataContext.Staduims}" AutoGenerateColumns="False" CanUserReorderColumns="True">
 						<DataGrid.Columns>
 							<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
@@ -163,15 +180,12 @@
 						</DataGrid.Columns>
 					</DataGrid>
 				</Grid>
+				<Button Grid.Row="0"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">New</Button>
+			</Grid>
 			</TabItem>
 			<TabItem>
 				<TabItem.Header>
-					<Button>New</Button>
-				</TabItem.Header>
-			</TabItem>
-			<TabItem>
-				<TabItem.Header>
-					<Button>Save Changes</Button>
+					<Button Command="{Binding $parent[Window].DataContext.SaveChangesToBD}">Save Changes</Button>
 				</TabItem.Header>
 			</TabItem>
 			<TabItem>
