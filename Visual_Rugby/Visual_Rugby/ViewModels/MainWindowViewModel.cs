@@ -1,140 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data.SQLite;
+using System.Data;
 using ReactiveUI;
-using System.Collections.ObjectModel;
 using Visual_Rugby.Models;
-
+using System.Collections.ObjectModel;
 
 namespace Visual_Rugby.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private DataSet tables;
+        private DBContext context;
+
+        private ObservableCollection<DataTable> tablesList;
+        public ObservableCollection<DataTable> Tables
+        {
+            get => tablesList;
+            private set => this.RaiseAndSetIfChanged(ref tablesList, value);
+        }
+
+        private DataTable selectedTable;
+        public DataTable SelectedTable
+        {
+            get => selectedTable;
+            set => this.RaiseAndSetIfChanged(ref selectedTable, value);
+        }
+
         
-        private ObservableCollection<Team> _teams;
-        private ObservableCollection<Result> _results;
-        private ObservableCollection<Staduim> _staduims;
-        private ObservableCollection<Tournament> _tournaments;
-        private ObservableCollection<Match> _matchs;
-        private ObservableCollection<Country> _countrys;
-        rugbyContext data;
-        DBcontext tablesDB;
-        public rugbyContext Data
-        {
-            get { return data; }
-            set { this.RaiseAndSetIfChanged(ref data, value); }
-        }                                    
-       
-        private ViewModelBase _content;
-        public ViewModelBase Content
-        {
-            get => _content;
-            set => this.RaiseAndSetIfChanged(ref _content, value);
-
-        }
-        
-        public ObservableCollection<Team> Teams
-        {
-            get => _teams;
-            set => this.RaiseAndSetIfChanged(ref _teams, value);
-        }
-
-        public ObservableCollection <Result> Results
-        {
-            get => _results;
-            set => this.RaiseAndSetIfChanged(ref _results, value);
-        }
-
-        public ObservableCollection<Staduim> Staduims
-        {
-            get => _staduims;
-            set => this.RaiseAndSetIfChanged(ref _staduims, value);
-        }
-
-        public ObservableCollection<Tournament> Tournaments
-        {
-            get => _tournaments;
-            set => this.RaiseAndSetIfChanged(ref _tournaments, value);
-        }
-
-        public ObservableCollection<Match> Matches
-        {
-            get => _matchs;
-            set => this.RaiseAndSetIfChanged(ref _matchs, value);
-        }
-
-        public ObservableCollection<Country> Countries
-        {
-            get => _countrys;
-            set => this.RaiseAndSetIfChanged(ref _countrys, value);
-        }
-
         public MainWindowViewModel()
         {
-            Teams = new ObservableCollection<Team>();
-            Results = new ObservableCollection<Result>();
-            Staduims = new ObservableCollection<Staduim>();
-            Tournaments = new ObservableCollection<Tournament>();
-            Matches = new ObservableCollection<Match>();
-            Countries = new ObservableCollection<Country>();
-            using(var db = new rugbyContext())
+            context = DBContext.getInstance();
+            tables = context.getDataSet();
+            Tables = new ObservableCollection<DataTable>();
+            foreach(DataTable t in tables.Tables)
             {
-                foreach (var team in db.Teams) Teams.Add(team);
-                foreach (var result in db.Results) Results.Add(result);
-                foreach (var staduim in db.Staduims) Staduims.Add(staduim);
-                foreach (var tournament in db.Tournaments) Tournaments.Add(tournament);
-                foreach (var match in db.Matches) Matches.Add(match);
-                foreach (var country in db.Countries) Countries.Add(country);
+                Tables.Add(t);
             }
-            Content = new DataTableViewModel();
-            
         }
 
-        public void DeleteRowTeam(Team team)
+        public void AddRow()
         {
-            Teams.Remove(team);
-         
+            if (SelectedTable as MyRequest != null) return;
+            DataRow row = SelectedTable.NewRow();
+            row.BeginEdit();
+            for(int i=0; i<row.ItemArray.Length; i++)
+            {
+                row[row.Table.Columns[i].ColumnName] = "0";
+            }
+            row.EndEdit();
+            SelectedTable.Rows.Add(row);
         }
-        public void DeleteRowResult(Result result)
+
+        public void DeleteRows()
         {
-            Results.Remove(result);
-            
+            SelectedTable.Rows.RemoveAt(SelectedTable.Rows.Count - 1);
+            this.RaisePropertyChanged(nameof(SelectedTable.Rows));
         }
-        public void DeleteRowMatch(Match match)
+        public void AddTable(DataTable table)
         {
-            Matches.Remove(match);
-            
-        }
-        public void DeleteRowCountry(Country country)
-        {
-            Countries.Remove(country);
-            
-        }
-        public void DeleteRowStaduim(Staduim staduim)
-        {
-            Staduims.Remove(staduim);
-            
-        }
-        public void DeleteRowTournament(Tournament tournament)
-        {
-            Tournaments.Remove(tournament);
+            if(!Tables.Contains(table))
+                Tables.Add(table);
         }
         
-
-        private void NewRowTeam() => Teams.Add(new Team());
-        private void NewRowResult() => Results.Add(new Result());
-        private void NewRowCountry() => Countries.Add(new Country());
-        private void NewRowMatch() => Matches.Add(new Match());
-        private void NewRowStaduim() => Staduims.Add(new Staduim());
-        private void NewRowTournament() => Tournaments.Add(new Tournament());
-        private void SaveChangesToBD()
-        }
-            tablesDB.SaveChanges();
-        }
-        private void GoToMainMenu()
+        public void OnClick()
         {
-            Content = new DataTableViewModel();
+            context.Save(tables);
         }
-        public void RequestToDB()
+        public void deleteQuery(MyRequest quer)
         {
-            Content = new RequestViewModel();
+            Tables.Remove(quer);
+            this.RaisePropertyChanged("Tables");
         }
     }
 }
